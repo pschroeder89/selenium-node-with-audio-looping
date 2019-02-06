@@ -4,6 +4,8 @@ Selenium Chrome Node Debug Image with Audio Looping Support
 This is a standard Selenium Chrome Node Debug image from SeleniumHQ, with some added audio driver magic to help test
 speech recognition within client applications.
 
+[Docker Repository](https://hub.docker.com/r/pschroeder89/selenium-with-audio-looping)
+
 #### How It Works
 Using PulseAudio, we create a virtual speaker, and a virtual microphone that accepts the speaker output as its input.
 The virtual speaker "plays" the audio into the virtual microphone, as if a user is speaking the content of the audio file.
@@ -14,12 +16,11 @@ play audio files hosted on an external server, you can simply pass the URL into 
 
 ##### Why do we need to run a server on localhost to serve these audio files? Can't we just play the audio files straight from the directory?
 Good questions! Chrome blocks access to local files by default due to security concerns. There is a flag you can set at launch,
-`--allow-file-access`, that would allow us to directly use the local files. In fear of Google removing that flag
+`--allow-file-access-from-files`, that would allow us to directly use the local files. In fear of Google removing that flag
 in the future, we set up a local server on port 8000 to prevent future work.
 
 #### Creating Audio Files
-Any audio file that Chrome supports should work fine. I personally use Audacity and save recordings as 16Mhz WAV files. 
-Store your recorded files in the `media` folder of this repo, or on some external server.
+Any audio file that Chrome supports should work fine. I personally use Audacity and save recordings as 16Mhz WAV files for lossless quality. Store your recorded files in the `media` folder of this repo, or on some external server.
 
 #### To add to your Selenium project
 In your Selenium configuration's Chrome desiredCapabilities, make sure you are sending an argument of `--use-fake-ui-for-media-stream`
@@ -45,6 +46,7 @@ file.
 Nightwatch.js Custom Command example:
 
 ```javascript
+// Filename = speakIntoMicrophone.js
 exports.command = function(wavFilename, server = 'http://localhost:8000/') {
   this.executeAsync(
     (url, done) => { // Pass in the url, which is defined by the [server + wavFileName] array below, and a done callback
@@ -96,7 +98,7 @@ Get a Selenium Hub booted up:
 `docker run -d -p 4444:4444 --name selenium-hub --net grid selenium/hub:latest`
 
 Start up this image and attach it to the Hub:
-`docker run -d --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm -p 5900:5900 selenium-node-with-audio-looping-1`
+`docker run -d --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm -p 5900:5900 pschroeder89/selenium-with-audio-looping:latest`
 
 By forwarding port 5900, you can use VNC to remote into the node container at `localhost:5900` and watch / debug your tests.
 
