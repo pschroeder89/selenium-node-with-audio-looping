@@ -18,8 +18,8 @@ Good questions! Chrome blocks access to local files by default due to security c
 in the future, we set up a local server on port 8000 to prevent future work.
 
 #### Creating Audio Files
-Create your audio recordings in Audacity as 16Mhz WAV files. Store your recorded files in the `media` folder of this repo,
-or on some external server.
+Any audio file that Chrome supports should work fine. I personally use Audacity and save recordings as 16Mhz WAV files. 
+Store your recorded files in the `media` folder of this repo, or on some external server.
 
 #### To add to your Selenium project
 In your Selenium configuration's Chrome desiredCapabilities, make sure you are sending an argument of `--use-fake-ui-for-media-stream`
@@ -96,4 +96,4 @@ Get a Selenium Hub booted up:
 Start up this image and attach it to the Hub:
 `docker run -d --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm -p 5900:5900 selenium-node-with-audio-looping-1`
 
-By forwarding port 5900, you can use VNC to remote into the node container at localhost:5900 and watch / debug your tests.
+By forwarding port 5900, you can use VNC to remote into the node container at `localhost:5900` and watch / debug your tests.
