@@ -47,17 +47,19 @@ Nightwatch.js Custom Command example:
 ```javascript
 exports.command = function(wavFilename, server = 'http://localhost:8000/') {
   this.executeAsync(
-    (url, done) => {
-      const audio = new Audio();
-      audio.src = url;
+    (url, done) => { // Pass in the url, which is defined by the [server + wavFileName] array below, and a done callback
+      const audio = new Audio(); // Create an audio object
+      audio.src = url; // Add the URL of the audio file to the audio object's src
       audio.addEventListener('ended', () => {
+        // Call executeAsync's done() callback when the audio's "ended" event is hit, so the command is considered "done" when the audio is done playing. 
+        // This is why we use executeAsync and not execute! With execute, the audio would get played and the test would move on without waiting for completion.
         done();
       });
-      audio.play();
+      audio.play(); // Play that funky music
     },
-    [server + wavFilename],
+    [server + wavFilename], // This is the url parameter used by executeAsync above
     () => {
-      console.log(' ♦ Played ' + wavFilename + ' into microphone.');
+      console.log(' ♦ Played ' + wavFilename + ' into microphone.'); // Callback 
     }
   );
 };
