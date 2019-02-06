@@ -14,12 +14,11 @@ play audio files hosted on an external server, you can simply pass the URL into 
 
 ##### Why do we need to run a server on localhost to serve these audio files? Can't we just play the audio files straight from the directory?
 Good questions! Chrome blocks access to local files by default due to security concerns. There is a flag you can set at launch,
-`--allow-file-access`, that would allow us to directly use the local files. In fear of Google removing that flag
+`--allow-file-access-from-files`, that would allow us to directly use the local files. In fear of Google removing that flag
 in the future, we set up a local server on port 8000 to prevent future work.
 
 #### Creating Audio Files
-Any audio file that Chrome supports should work fine. I personally use Audacity and save recordings as 16Mhz WAV files. 
-Store your recorded files in the `media` folder of this repo, or on some external server.
+Any audio file that Chrome supports should work fine. I personally use Audacity and save recordings as 16Mhz WAV files for lossless quality. Store your recorded files in the `media` folder of this repo, or on some external server.
 
 #### To add to your Selenium project
 In your Selenium configuration's Chrome desiredCapabilities, make sure you are sending an argument of `--use-fake-ui-for-media-stream`
@@ -45,6 +44,7 @@ file.
 Nightwatch.js Custom Command example:
 
 ```javascript
+// Filename = speakIntoMicrophone.js
 exports.command = function(wavFilename, server = 'http://localhost:8000/') {
   this.executeAsync(
     (url, done) => {
