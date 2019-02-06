@@ -78,7 +78,7 @@ Ruby / Rspec method example:
 def speak_into_mic(wav_file_name, server = 'http://localhost:8000/')
     @driver.execute_async_script(
       'const done = arguments[arguments.length - 1]; function speakIntoMic(url) { const audio = new Audio(); audio.src = url; audio.addEventListener("ended", function () {done()}); audio.play();}; speakIntoMic(arguments[0]);',
-      server + wav_file_name, null
+      server + wav_file_name, nil
     )
   end
 ```
