@@ -97,3 +97,6 @@ Start up this image and attach it to the Hub:
 `docker run -d --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm -p 5900:5900 selenium-node-with-audio-looping-1`
 
 By forwarding port 5900, you can use VNC to remote into the node container at `localhost:5900` and watch / debug your tests.
+
+To kill all running containers:
+`docker rm -f $(docker ps -aq)`
