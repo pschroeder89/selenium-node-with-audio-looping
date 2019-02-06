@@ -1,4 +1,4 @@
-Selenium Chrome Node Debug Image with Audio Looping Support
+Selenium Chrome Node Debug Image with Audio Looping
 ================
 
 This is a standard Selenium Chrome Node Debug image from SeleniumHQ, with some added audio driver magic to help test
