@@ -8,7 +8,7 @@ speech recognition within client applications.
 Using PulseAudio, we create a virtual speaker, and a virtual microphone that accepts the speaker output as its input.
 The virtual speaker "plays" the audio into the virtual microphone, as if a user is speaking the content of the audio file.
 
-In addition to creating an output-to-input loop, we optionally serve wav files in this repository's `media` folder using Python's
+In addition to creating an output-to-input loop, we serve wav files from this repository's `media` folder using Python's
 SimpleHTTPServer. In the container, the files can be accessed at `http://localhost:8000/`. Alternatively, if you want to
 play audio files hosted on an external server, you can simply pass the URL into your tests instead of `localhost:8000`.
 
@@ -100,3 +100,10 @@ By forwarding port 5900, you can use VNC to remote into the node container at `l
 
 To kill all running containers:
 `docker rm -f $(docker ps -aq)`
+
+#### Not using Docker Selenium / Linux for your Selenium Grid?
+If you're using Mac hardware or Mac virtual machines, check out [Soundflower](https://github.com/mattingalls/Soundflower/releases/tag/2.0b2) to route audio output to input.
+
+I dont use Windows, but I've read that [VoiceMeeter](https://www.vb-audio.com/Voicemeeter/index.htm) is comparable to Soundflower / PulseAudio.
+
+Once you have your audio loop set up, you can [call your audio files from your tests](#Calling the audio files from within your tests).
