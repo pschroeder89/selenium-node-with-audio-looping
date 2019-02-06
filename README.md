@@ -4,6 +4,8 @@ Selenium Chrome Node Debug Image with Audio Looping Support
 This is a standard Selenium Chrome Node Debug image from SeleniumHQ, with some added audio driver magic to help test
 speech recognition within client applications.
 
+[Docker Repository](https://hub.docker.com/r/pschroeder89/selenium-with-audio-looping)
+
 #### How It Works
 Using PulseAudio, we create a virtual speaker, and a virtual microphone that accepts the speaker output as its input.
 The virtual speaker "plays" the audio into the virtual microphone, as if a user is speaking the content of the audio file.
@@ -94,7 +96,7 @@ Get a Selenium Hub booted up:
 `docker run -d -p 4444:4444 --name selenium-hub --net grid selenium/hub:latest`
 
 Start up this image and attach it to the Hub:
-`docker run -d --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm -p 5900:5900 selenium-node-with-audio-looping-1`
+`docker run -d --net grid -e HUB_HOST=selenium-hub -v /dev/shm:/dev/shm -p 5900:5900 pschroeder89/selenium-with-audio-looping:latest`
 
 By forwarding port 5900, you can use VNC to remote into the node container at `localhost:5900` and watch / debug your tests.
 
