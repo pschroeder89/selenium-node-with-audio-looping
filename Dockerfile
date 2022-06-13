@@ -1,4 +1,4 @@
-FROM selenium/node-chrome-debug:3.141.59
+FROM selenium/standalone-chrome:4.2.2-20220609
 
 USER root
 # Install pulse audio and python
